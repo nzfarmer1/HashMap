@@ -3,6 +3,7 @@
 
 // Hash map class template
 template <typename K, typename V, typename F = KeyHash<K> >
+
 class HashMap {
 public:
     HashMap() {
@@ -24,6 +25,51 @@ public:
         // destroy the hash table
         delete [] table;
     }
+
+    void iter(void  (*cb)(const K &key)){
+        for (int i = 0; i < TABLE_SIZE; ++i) {
+            HashNode<K, V> *entry = table[i];
+	    if (entry !=NULL)
+		cb(entry->getKey());
+	}
+    };
+
+    void iter(void  (*cb)(const K &key, const V &val)){
+        for (int i = 0; i < TABLE_SIZE; ++i) {
+            HashNode<K, V> *entry = table[i];
+	    if (entry !=NULL)
+		cb(entry->getKey(),entry->getValue());
+	}
+    };
+
+    void reset() { clear(); };
+
+    void clear() {
+	K key;
+	V val;
+        for (int i = 0; i < TABLE_SIZE; ++i) {
+            HashNode<K, V> *entry = table[i];
+	    if (entry !=NULL) {
+		key = entry->getKey();
+		val = entry->getValue();
+		this->remove(key);
+	    }
+   	 }
+    }
+
+    void clone(HashMap &_in) {
+	K key;
+	V val;
+        for (int i = 0; i < TABLE_SIZE; ++i) {
+            HashNode<K, V> *entry = _in.table[i];
+	    if (entry !=NULL) {
+		key = entry->getKey();
+		val = entry->getValue();
+		this->put(key,val);
+	    }
+   	 }
+    }
+
 
     bool get(const K &key, V &value) {
         unsigned long hashValue = hashFunc(key);
