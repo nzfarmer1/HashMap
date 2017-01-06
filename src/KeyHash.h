@@ -1,4 +1,4 @@
-static const int TABLE_SIZE = 12;
+static const int TABLE_SIZE = 33;
 
 // Default hash function class
 template <typename K>

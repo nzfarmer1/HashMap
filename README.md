@@ -1,6 +1,16 @@
 Basic Hash Map Implementation in C++
 ------------------------------------
 
+Forked from: https://medium.com/@aozturk/simple-hash-map-hash-table-implementation-in-c-931965904250#.3de167cv4
+
+Adapted to work with AgSense Farm Assistant solution: http://facebook.com/agsensenz
+
+Added following methods:
+ - clone()
+ - iter(key)
+ - iter(key,val)
+ - clear() // reset()
+
 Compile and run tests
 
 	make
